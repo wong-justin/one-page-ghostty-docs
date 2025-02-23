@@ -10,8 +10,11 @@ export default defineConfig({
   // base: '/ghostty-reference/',
 
   // for deploying to github:
-  site: 'https://wong-justin.github.io',
-  base: 'one-page-ghostty-docs',
+  // site: 'https://wong-justin.github.io',
+  // base: 'one-page-ghostty-docs',
+
+  // for deploying to github with custom domain:
+  site: 'https://ghostty.in-one.page',
 
 	integrations: [
 		starlight({
