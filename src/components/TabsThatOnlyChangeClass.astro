@@ -1,0 +1,171 @@
+---
+// my version of simplified tabs
+// on tab click, set classname of container (and remove old classname)
+// compared to starlight Tabs component that holds two different types of content,
+// and which also uses overworked aria-roled link tags instead of styled radio buttons and labels
+//
+// hardcoded options for now (linux/macos);
+// not generalized for any amount of platforms/tab titles, but that's ok
+
+// extra features TODO:
+// - recognize operating system from user agent
+// - persist in localstorage? actually nah, the user agent on their device should be the same the next time/page that they visit
+
+let { initialPlatformClass } = Astro.props;
+
+import { generateID } from './id-generator.js'
+
+let id1 = generateID()
+let id2 = generateID()
+---
+<script>
+class TabbedContainer extends HTMLElement {
+	// tabs: HTMLAnchorElement[];
+	radios: HTMLInputElement[];
+	platformClassNames: string[];
+	panel: HTMLElement;
+
+	constructor() {
+		super()
+		this.panel = this.querySelector<HTMLElement>('.panel')
+		this.radios = this.querySelectorAll<HTMLInputElement>('input[type="radio"][name="platform"]')
+		this.platformClassNames = [...this.radios].map(r => r.value)
+
+		this.radios.forEach(radio => {
+			// when selected
+			radio.addEventListener('change', () => {
+				let selectedClass = radio.value
+
+				// propgate change across other elements on this page
+				let otherTabContainers = document.querySelectorAll('tabbed-container')
+				let matchingRadios = document.querySelectorAll('input[type="radio"][value="' + selectedClass + '"]')
+				matchingRadios.forEach(r => r.checked = true) // does not trigger change listener
+				otherTabContainers.forEach(c => c.changePlatformClass(selectedClass))
+			})
+		})
+
+		// browser reload may preserve radio button state, despite declaring a different initialPlatformClass
+		// if we don't account for that, the view may not match the radio button state
+		// so let's check radio state here
+		// initialPlatformClass is only useful for first-time visits per tab, not for refreshed sessions
+		//
+		// i think there's a more consistent, elegant way to handle initial state, 
+		// but it's not coming to mind at the moment --
+		// this little UI flash of add/remove a few lines on page load is not too bad for now
+		let currentClass = this.querySelector('input[type="radio"]:checked').value
+		this.changePlatformClass(currentClass)
+	}
+
+	changePlatformClass(newClassName: string) {
+		this.platformClassNames.forEach(c => this.panel.classList.remove(c))
+		this.panel.classList.add(newClassName)
+	}
+}
+customElements.define('tabbed-container', TabbedContainer);
+</script>
+
+
+<style>
+	.tablist-wrapper {
+		margin-top: 1rem;
+	}
+
+	.tablist {
+		display: flex;
+		list-style: none;
+		border-bottom: 2px solid var(--sl-color-gray-5);
+		padding: 0;
+	}
+
+	label {
+		/* align this element's border with parent element's border */
+		margin-bottom: -2px;
+	}
+
+	input[type="radio"] {
+		position: absolute;
+		opacity: 0;
+		width: 0;
+		height: 0;
+	}
+
+	input[type="radio"] + label {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+		padding: 0 1.25rem;
+		text-decoration: none;
+		border-bottom: 2px solid var(--sl-color-gray-5);
+		color: var(--sl-color-gray-3);
+		outline-offset: var(--sl-outline-offset-inside);
+		overflow-wrap: initial;
+	}
+
+	input[type="radio"]:checked + label {
+		color: var(--sl-color-white);
+		border-color: var(--sl-color-text-accent);
+		font-weight: 600;
+		outline: inherit;
+	}       
+
+	/* note that :focus happens even when clicking 
+	 * (undesirable here; user already knows what they focused on)
+	 * versus :focus-visible when "a visible indicator is needed", 
+	 * ie tabbing and they need to know where the "cursor" is
+	 */
+	input[type="radio"]:focus-visible + label {
+		/* not sure why focus outline is gone compared to other elements,
+		 * but/so replicate default focus styles when tabbing this label into focus
+		 *
+		 * TODO: test on other browser like safari, chrome. good on firefox so far.
+		 */
+		outline: 2px auto -webkit-focus-ring-color; /* this line seems important for min/chromium */
+    		outline-color: -webkit-focus-ring-color;
+    		outline-style: auto;
+		/*
+		outline: 2px solid var(--sl-color-white);
+		outline-offset: var(--sl-outline-offset-inside);
+		*/
+	}
+
+	input[type="radio"] + label:hover {
+		cursor: pointer
+	}
+
+	.tablist-wrapper ~ :global([role='tabpanel']) {
+		margin-top: 1rem;
+	}
+</style>
+
+<tabbed-container>
+	<div class="tablist-wrapper">
+		<form class="tablist">
+			<input
+				type="radio"
+				name="platform"
+				value="only-gtk-linux"
+				checked={initialPlatformClass === 'only-gtk-linux'}
+				id={id1}
+			>
+			</input>
+			<label for={id1}>
+				GTK (Linux)
+			</label>
+			<input
+				type="radio"
+				name="platform"
+				value="only-macos"
+				checked={initialPlatformClass === 'only-macos'}
+				id={id2}
+			>
+			</input>
+			<label for={id2}>
+				macOS
+			</label>
+		</form>
+		<div class={'panel platform ' + initialPlatformClass}>
+			<!-- <slot class={'panel platform ' + initialPlatformClass}> -->
+			<slot></slot>
+		</div>
+	</div>
+</tabbed-container>

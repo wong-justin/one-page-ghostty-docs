@@ -1,0 +1,25 @@
+beware, lots of ugliness: some hard-coding, lots of copy-paste from ghostty docs, some unneccesary artifacts from prototyping, some typos
+
+using project structure of `npm create astro@latest -- --template starlight`
+
+the main page is at content/docs/index.mdx
+
+the rest of the code is in src/components
+
+mdx is such a messy format. next time, i will try not to mix markdown with js, custom components, and html.
+
+also src/custom.css to override some starlight styles and write my own. for now, i prefer a global css file over local component styles. sometimes i used !important to override hard-to-beat local-scoped styles. sorry.
+
+i modified a few starlight components like tabs, header. couldn't get footer, head working tho. copy-pasting the original implementations didn't work because imports in starlight source code are different than imports in my source code.
+
+plugins/wahtever.js is a just build script, playing by astro/starlight/expressive-code rules. it checks the lines in a regular expressive-code block and searches for ghostty keywords, then highlights/links them to their respective h3s/descriptions. i think it's kinda clever.
+
+including pagefind was one step with starlight. very nice. not sure about configuring pagefind, tho.
+
+images should probably go in src/assets, once i get around to adding screenshots. i think astro compresses/optimizes the images automatically?
+and static assets like favicons apparently go in public/. :shrug:
+
+
+
+
+

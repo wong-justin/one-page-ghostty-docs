@@ -1,0 +1,62 @@
+---
+import { logos } from 'virtual:starlight/user-images';
+import config from 'virtual:starlight/user-config';
+const { siteTitle, siteTitleHref } = Astro.locals.starlightRoute;
+---
+
+{/* 
+original source:
+https://github.com/withastro/starlight/blob/c957b97bed3e22ee1cbcf3e150ae13d3638d34c9/packages/starlight/components/SiteTitle.astro 
+i moved the h1 away from PageTitle.astro and put it here instead
+*/}
+
+<a href={siteTitleHref} class="site-title sl-flex">
+	{
+		config.logo && logos.dark && (
+			<>
+				<img
+					class:list={{ 'light:sl-hidden print:hidden': !('src' in config.logo) }}
+					alt={config.logo.alt}
+					src={logos.dark.src}
+					width={logos.dark.width}
+					height={logos.dark.height}
+				/>
+				{/* Show light alternate if a user configure both light and dark logos. */}
+				{!('src' in config.logo) && (
+					<img
+						class="dark:sl-hidden print:block"
+						alt={config.logo.alt}
+						src={logos.light?.src}
+						width={logos.light?.width}
+						height={logos.light?.height}
+					/>
+				)}
+			</>
+		)
+	}
+	<h1 id="_top">
+	<span class:list={{ 'sr-only': config.logo?.replacesTitle }} translate="no">
+		{siteTitle}
+	</span>
+	</h1>
+</a>
+
+<style>
+	.site-title {
+		align-items: center;
+		gap: var(--sl-nav-gap);
+		font-size: var(--sl-text-h4);
+		font-weight: 600;
+		color: var(--sl-color-text-accent);
+		text-decoration: none;
+		white-space: nowrap;
+	}
+	img {
+		height: calc(var(--sl-nav-height) - 2 * var(--sl-nav-pad-y));
+		width: auto;
+		max-width: 100%;
+		object-fit: contain;
+		object-position: 0 50%;
+	}
+</style>
+

@@ -1,0 +1,24 @@
+---
+/* default at:
+https://github.com/withastro/starlight/blob/cf75b3ff32b1c520097a5e2b7d6a914ac85de7be/packages/starlight/components/Footer.astro
+*/
+import ThemeSelect from '@astrojs/starlight/components/ThemeSelect.astro';
+import Default from '@astrojs/starlight/components/Footer.astro';
+---
+
+<footer>
+	<div class="sl-flex" style="display:flex;align-items:center">
+<ThemeSelect></ThemeSelect>
+</div>
+<slot></slot>
+</footer>
+
+<style>
+	footer {
+		background-color: var(--sl-color-bg-nav);
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+
+	}
+</style>

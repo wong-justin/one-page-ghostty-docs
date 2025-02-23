@@ -1,0 +1,35 @@
+---
+// this is javascript, not normal markdown frontmatter
+// import foo from bar
+const { title, colspan, collapsed } = Astro.props
+
+// a helpful tip:
+// https://docs.astro.build/en/guides/styling/#passing-a-class-to-a-child-component
+import TableOfContents from '@astrojs/starlight/components/TableOfContents.astro';
+---
+
+<!-- 
+<details open={!collapsed}>
+<summary>
+{/* quick and dirty slugifying; beware characters like #,/,etc */}
+	<h2 id={title.toLowerCase().replaceAll(' ', '-')}>
+		{title}
+	</h2>
+
+
+<svg aria-hidden="true" class="caret astro-huas74v4 astro-445ym5ac" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"></path></svg>
+</summary>
+<slot></slot>
+
+</details>
+	-->
+
+<div>
+
+	<h2 id={title.toLowerCase().replaceAll(' ', '-')}>
+		{title}
+	</h2>
+
+<slot></slot>
+
+</div>

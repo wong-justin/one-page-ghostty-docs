@@ -1,0 +1,253 @@
+:root {
+	/* dirty hard-coding max width of code pane
+	 *
+	 * for reference, 60ch is 503px
+	 * 80ch is too wide
+	 * 70ch feels right
+	 */
+	--code-block-max-width: 618px; 
+
+	/*
+	 * to disable sidebar, i should try using an empty splash template
+	 * but then add things like table of contents i think
+	 *
+	 * this seems to work for now
+	 */
+	--sl-sidebar-width: 0;
+}
+
+h1 {
+	/* since h1 is now in the navbar, use navbar styling instead of intendned page content styling */
+	all: unset;
+}
+
+div.content-panel:first-child {
+	/* see astro.config */
+        /* i can't remove the initial ContentPane that used to have the PageTitle */
+        /* i must remove it with css isntead */
+	display: none;
+}
+
+header {
+	/* better alignment with content below */
+	padding: var(--sl-nav-pad-x) var(--sl-content-pad-x) !important;
+}
+
+.content-panel > .sl-container {
+	/* remove the outermost container constraint; i will manage children's max content widths */
+	max-width: unset;
+}
+
+/* need to be more specific than the competing starlight default styles */
+/* .grid-container > .grid-item { */
+/* max-width: var(--sl-content-width); */
+
+/* note: with golden ratio,
+ * widest config attribute is visible ~910px viewport width 
+ * keybind code block is fully visible (no scrollbar) at 1361px viewport width
+ *
+ * with 50% split, code is easily visible ~870px
+ * words are ~50chrs
+ *
+ * i say ~900px is a safe breakpoint between a one- and two- column layout
+ * 
+ */
+
+.twocol-container {
+	display: grid;
+	gap: var(--sl-content-pad-x);
+}
+
+.twocol-container > * {
+	/* fighting default starlight styles */
+	margin-top: 0 !important;
+
+	/* testing: weird hack to make sibling containers have the same height 
+	 * https://briananders.net/posts/how-to-match-the-height-of-sibling-elements/
+	 */
+	/*
+    	padding-bottom: 99999px;
+    	margin-bottom: -99999px;
+	*/
+	max-width: 100%;
+	overflow-x: auto;
+}
+
+.twocol-container > *:first-child {
+}
+
+/* .twocol-container > *:nth-child(2) { */
+/* this is the longer details pane */
+.twocol-container > *:last-child {
+	max-width: var(--sl-content-width);
+	overflow-y: auto;
+}
+
+.need-this-container-for-max-height {
+}
+
+
+/* some breakpoints
+ * trying to make two-col layout work as often as possible
+ *
+ * two cols is comfortable with a 40/60 split: anywhere past 900px i think
+ */
+.twocol-container {
+	/* single column layout for skinny screens */
+	grid-template-columns: 1fr;
+}
+
+/* still larger than half of most laptop screens, but oh well */
+/* 50/50: give code blocks more space than usual, since they're squished */
+/*
+@media (min-width: 750px) {
+	.twocol-container {
+		grid-template-columns: 50% 50%;
+	
+	}
+}
+*/
+
+/* @media (min-width: 950px) { */
+@media (min-width: 900px) {
+	.twocol-container {
+		/* code blocks are already wide enough, so we can start giving adjacent text more room and code less room */
+		grid-template-columns: 45% 1fr; /* essentially 45/55, except for some padding */
+		grid-template-columns: 
+			min(50%, var(--code-block-max-width)) 
+			1fr;
+			/*
+		grid-template-columns: 
+			min(45%, var(--code-block-max-width))
+			min(1fr, var(--sl-content-width));
+			*/
+	}
+
+	/* this is the longer details pane that needs to match the height of its shorter sibling, the code pane
+	 *
+	 * a solution!
+	 * https://stackoverflow.com/a/68128072 
+	 */
+	.twocol-container > *:last-child {
+		position: relative;
+	}
+	.twocol-container > *:last-child > .need-this-container-for-max-height {
+		max-width: 100%;
+		padding-right: var(--sl-content-pad-x);
+		position: absolute;
+		max-height: 100%;
+	}
+
+}
+
+/*
+#contains-all-sections {
+	max-width: calc(1.618 * var(--sl-content-width));
+	max-width: var(--sl-content-width);
+	margin-inline: auto;
+}
+*/
+
+
+.expressive-code {
+	/* ballpark for readable config file */
+	max-width: var(--code-block-max-width);
+	max-width: min(var(--code-block-max-width), 100%);
+	margin-inline: auto;
+	/* horiz code scroll when it's getting a liottle squished */
+	overflow-x: auto;
+}
+
+.expressive-code .title {
+	/* note that figcaption.header has width 2.1rem and positoin left 1rem
+	/*
+	font-family: monospace
+	*/
+}
+
+summary::before {
+	/* try making svg arrows bigger */
+	position: absolute;
+	right: 0;
+	height: 30px !important;
+	width: 30px !important;
+}
+
+code a {
+	/* get rid of purple default link color, 
+	 * but use more intense color to indicate this is a link.
+	 *
+	 * note that --sl-color-white is poorly named; it actually means fg-color,
+	 * and it automatically switches between light and dark modes
+	 *
+	 * note that this is the same color used in headings,
+	 * which is more intense that the usual font/codefont color
+	 *
+	 * TODO: try replacing all these important! properties with
+	 * locally-written styles that will take priority after astro builds
+	 */
+	color: var(--sl-color-white) !important;
+
+	/* use bold instead of underlines since underlines were hard to read */
+	text-decoration: none !important;
+	font-weight: bold !important;
+}
+
+code a:hover {
+	/* extra UX affordance to hint that this is a link */
+	text-decoration: underline !important;
+}
+
+div.tablist-wrapper {
+	/* fix little scrollbar bug, a minor annoyance */
+	overflow: hidden;
+}
+
+.only-gtk-linux .only-macos {
+	display: none;
+}
+
+.only-macos .only-gtk-linux {
+	display: none;
+}
+
+.main-pane {
+	/* quick fix to not let two-pane content become too large */
+	/* max-width: calc(2 * var(--sl-content-width)); */
+	max-width: calc(var(--code-block-max-width) + var(--sl-content-width) + 100px);
+	margin-inline: auto;
+}
+
+
+h2 {
+	margin-top: 1.5em;
+}
+
+h3 a {
+	color: var(--sl-color-white) !important;
+	text-decoration: none !important;
+}
+
+h3 a:hover {
+	text-decoration: underline !important;
+}
+
+
+/* reminder: doesn't work in edge or safari, and occasionally behaves janky
+ */
+html {
+	scroll-behavior: smooth;
+}
+/* for those with motion sickness */
+@media screen and (prefers-reduced-motion: reduce) {
+	html {
+		scroll-behavior: auto;
+	}
+}
+
+
+a[role="tab"] {
+	/*
+	color: red !important;
+	*/
+}

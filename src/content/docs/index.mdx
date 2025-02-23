@@ -1,0 +1,251 @@
+---
+title: Ghostty in One Page
+description: Get started building your docs site with Starlight.
+template: splash
+head:
+  - tag: title
+    content: Ghostty in One Page
+---
+
+{/*
+tableOfContents:
+  minHeadingLevel: 3
+  maxHeadingLevel: 3
+*/}
+
+{/* 
+template: splash successfully gets rid of sidebar,
+but it also gets rid of table of contents, which i kinda liked
+the alternative is no template, which is a default starlight doc page, in which many components were designed to depend on a sidebar length
+/*}
+
+{/* 
+TODO: where'd the mobile menu go?
+
+TODO: a cookie to remember collapsed sections, so configuration and keybinds can always be at the top.
+also: perhaps just bookmark the anchor link? altho the user has to do that. maybe i should link to the config section always, and never share just a plain link? eh
+or perhaps parse url params with js, like
+/?sections=configuration,keybinds-and-actions
+or worse
+/#configuration+keybinds-and-actions
+meh they both seem gross
+
+TODO: actually i dont need collapsed sections if i entirely omit "about" and "installation"
+*/}
+
+import { Aside, Code, Steps, Tabs, TabItem } from '@astrojs/starlight/components';
+import CollapsibleSection from '../../components/CollapsibleSection.astro';
+import TwoColumns from '../../components/TwoColumns.astro';
+import OptionsCodeblock from '../../components/OptionsCodeblock.mdx';
+import OptionsDocumentation from '../../components/OptionsDocumentation.mdx';
+import ActionsCodeblock from '../../components/ActionsCodeblock.mdx';
+import ActionsDocumentation from '../../components/ActionsDocumentation.mdx';
+import TabsThatOnlyChangeClass from '../../components/TabsThatOnlyChangeClass.astro';
+
+
+{/* 
+*/}
+
+
+
+<Aside>
+This is a quick reference for configuring Ghostty, the terminal emulator.
+Read the official documentation at [ghostty.org](https://ghostty.org/docs).
+</Aside>
+
+
+
+{/*
+<CollapsibleSection title="About" collapsed>
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc porta velit non risus ultricies viverra. Vestibulum congue dui eu augue iaculis, et faucibus turpis fermentum. Quisque tellus mi, eleifend sit amet tortor at, iaculis egestas enim. Nullam sit amet egestas felis. Quisque a pellentesque eros. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Donec ut commodo lorem. Vestibulum egestas interdum lacus sed consequat. Integer a posuere sem. Vestibulum interdum eget turpis non ullamcorper. Maecenas iaculis rutrum arcu nec sodales. Sed ac urna a odio suscipit placerat. In hac habitasse platea dictumst. Phasellus lacinia lorem magna, ac posuere turpis porta eu.
+
+(screenshot)
+
+
+### Comparison Table
+
+to alacritty, foot, wezterm
+
+</CollapsibleSection>
+
+
+<CollapsibleSection title="Installation" collapsed>
+
+Should be straightforward.
+
+<Aside>
+Windows support has been backlogged for a while.
+Read this thread for more details.
+</Aside>
+
+### Linux
+
+- Build from source
+- Package manager
+
+### macOS
+
+- download a universal binary, from ghostty.org
+- Package manager
+
+--- 
+
+yada yada
+
+
+</CollapsibleSection>
+*/}
+
+<CollapsibleSection title="Configuration">
+
+
+{/*<PlatformTabs></PlatformTabs>*/}
+<TabsThatOnlyChangeClass initialPlatformClass="only-gtk-linux">
+
+<TwoColumns>
+<div slot="left">
+<OptionsCodeblock></OptionsCodeblock>
+</div>
+
+<div slot="right">
+<div class="need-this-container-for-max-height">
+
+{/*
+Click on an option to jump to its description.
+
+Ghostty has hundreds of configuration options.
+
+Configure Ghostty by writing a config file at `~/.config/ghostty/config`
+
+You can start Ghostty with any of these configuration options by using command-line arguments in the format `ghostty --option-name=value`; for example, `ghostty --font-size=16`.
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc porta velit non risus ultricies viverra. Vestibulum congue dui eu augue iaculis, et faucibus turpis fermentum. Quisque tellus mi, eleifend sit amet tortor at, iaculis egestas enim. Nullam sit amet egestas felis. Quisque a pellentesque eros. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Donec ut commodo lorem. Vestibulum egestas interdum lacus sed consequat. Integer a posuere sem. Vestibulum interdum eget turpis non ullamcorper. Maecenas iaculis rutrum arcu nec sodales. Sed ac urna a odio suscipit placerat. In hac habitasse platea dictumst. Phasellus lacinia lorem magna, ac posuere turpis porta eu.
+*/}
+<OptionsDocumentation></OptionsDocumentation>
+
+</div>
+</div>
+</TwoColumns>
+
+</TabsThatOnlyChangeClass>
+
+</CollapsibleSection>
+
+<CollapsibleSection title="Keybinds and Actions">
+
+<TabsThatOnlyChangeClass initialPlatformClass="only-gtk-linux">
+
+<TwoColumns>
+<div slot="left">
+<ActionsCodeblock></ActionsCodeblock>
+</div>
+<div slot="right">
+<div class="need-this-container-for-max-height">
+<ActionsDocumentation></ActionsDocumentation>
+</div>
+</div>
+</TwoColumns>
+
+</TabsThatOnlyChangeClass>
+
+</CollapsibleSection>
+
+{/*
+<CollapsibleSection title="Colors and Themes" collapsed>
+
+Ghostty has several color configurations.
+
+Themes generally set the following colorful options:
+
+```text title="~/.config/ghostty/config"
+background = #282c34
+foreground = #ffffff
+cursor-color = 
+selection-foreground = 
+selection-background = 
+palette = 0=#1d1f21
+palette = 1=#cc6666
+palette = 2=#b5bd68
+palette = 3=#f0c674
+palette = 4=#81a2be
+palette = 5=#b294bb
+palette = 6=#8abeb7
+palette = 7=#c5c8c6
+palette = 8=#666666
+palette = 9=#d54e53
+palette = 10=#b9ca4a
+palette = 11=#e7c547
+palette = 12=#7aa6da
+palette = 13=#c397d8
+palette = 14=#70c0b1
+palette = 15=#eaeaea
+```
+
+But they can set any attribute, including:
+
+```text title="~/.config/ghostty/config" a-flag another-option="test"
+cursor-invert-fg-bg = false
+cursor-text = 
+macos-icon-ghost-color = 
+macos-icon-screen-color = 
+osc-color-report-format = 16-bit
+palette = 16=#000000
+...
+palette = 255=#eeeeee
+split-divider-color = 
+window-colorspace = srgb
+window-padding-color = background
+window-titlebar-background = 
+window-titlebar-foreground = 
+```
+
+to choose a theme, use 
+
+```
+theme = 
+```
+
+And if these options are set in the config, then the config options take proprity over any theme options.
+
+Ghostty has hundreds of built-in themes.
+you can also use a custom theme file.
+
+Colors are determined by:
+1) colors in your configuration file
+2) colors in the theme
+
+
+
+
+</CollapsibleSection>
+
+<CollapsibleSection title="Command-Line Options" collapsed>
+
+testing 
+```text frame="terminal"
+hello world in the terminal
+```
+
+</CollapsibleSection>
+
+*/}
+
+<CollapsibleSection title="Other Resources" collapsed>
+{/* call this section "Links" instead? */}
+
+- the complete, canonical Ghostty documentation: [ghostty.org/docs](https://ghostty.org/docs)
+- Ghostty source code: [github.com/ghostty-org/ghostty](https://github.com/ghostty-org/ghostty)
+- occasional devlogs and updates: [mitchellh.com/writing](https://mitchellh.com/writing)
+- examples of Ghostty's native macOS features: [gpanders.com/blog](https://gpanders.com/blog/ghostty-is-native-so-what/)
+- a configuration GUI: [ghostty.zerebos.com](https://ghostty.zerebos.com/)
+- community chatter: [discord.gg/ghostty](https://discord.gg/ghostty)
+
+</CollapsibleSection>
+
+{/*
+<script type="module">
+await import('/pagefind/pagefind-highlight.js')
+new PagefindHighlight({ highlightParam: "highlight" })
+</script>
+*/}

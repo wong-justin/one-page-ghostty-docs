@@ -1,0 +1,9 @@
+---
+const { class: class_ } = Astro.props
+---
+<div class={'twocol-container ' + class_}>
+<slot name="left">
+</slot>
+<slot name="right">
+</slot>
+</div>

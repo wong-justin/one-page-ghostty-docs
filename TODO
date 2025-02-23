@@ -1,0 +1,50 @@
+CURRENTLY COOKING UP:
+
+BACK BURNER:
+
+- get table of contents (TOC) working again
+
+- ux: when clicking on keyword, use js to smart scroll the definition/h3 directly next to the clicked keyword, instead of jumping to top and using browser anchor links
+    - consider sticky header as a potential solution to preserve horizontal alignment / prevent jumping to anchors
+
+- auto detect macos/appley user agent, or linux
+
+- link keywords when mentioned in other parts of the docs
+    - automate this so it recognizes when it happens again in newly added content
+
+- ux: increase link color contrast, at least for dark mode
+
+- ux: choose a font / style that makes code href visually distinct from plaintext code on all platforms (color change? add chain link icon? underline again? custom font?)
+
+- add content for about, installation?, color themes... probably lrequires collapsible sections, i think. and TOC.
+
+- add pagefind highlight results
+
+- adjust pagefind search weights and settings; because currently, searching for "quit" doesn't yield the h3 for quit in the top few results. h3s should probably be weighted heavier, and maybe increase the max results shown by a few too
+
+- generate opengraph images? thats like a CI/CD astro integration honestly, so wait until i publish the repo and mess with github actions and automate the more-important build steps
+
+- nit: put noscripts where they belong, like on pagefind searchbar, and the tabs, and the color theme switcher too
+
+- edit words with my own writing, trying to simplify / standardize / practice. also there are some simple formatting errors and inconsistencies.
+
+- linting, like with vale
+
+- add entry to projects section of my website
+
+- add visual indicator when a keyword is clicked/hovered that highlgihts or emphasizes the corresponding keyword link. or perhaps just a backlink from the h3.
+
+- put scrollable ldetails panes in cards, even with sadows at top/bottom, to better visually demarcate the content areas. mainly for wider screens.
+
+OTHER THOUGHTS:
+
+- emphasize the one-page-ness, as opposed to multi-page-ness of ghostty.org. how that relates to searching, clicking, looking,   thinking. eg. "linux users don't have to read abuot macos features". how filtering by platform means wading thru X% less content. compare a reader's usecase between both doc versions, eg. "wondering why $TERM has xterm", or "how do i reload my config", or "what are all the ways i can customize my keybinds"
+
+- pending documentation improvements that have been suggested i think on ghostty github discussions, but not much progress that i can see:
+    - showing default values;
+    - thoroughly document keybind action parameters (im thinking docopt style, like (opt|opt2) <int>);
+        - also thoroghly document config option values too, like (true|false|clipboard)
+    - differentiating between cli plus-commands and keybinds actions, since they're both just called "actions";
+    - add link to h3s and also copytoclpboard button for h3s
+    - add at least one screenshot, or perhaps a gallery
+
