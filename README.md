@@ -1,7 +1,8 @@
-My redesign of [Ghostty's](https://ghostty.org/) documentation.
+My redesign of [Ghostty](https://ghostty.org/)'s documentation.
 
 - filter content by macOS/Linux
 - shows default configuration values
+- shows default keybinds
 - config options ordered alphabetically
 - fits on one page
   - uses widescreen space
