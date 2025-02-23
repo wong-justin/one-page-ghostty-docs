@@ -6,8 +6,12 @@ import { linksInCodePlugin } from './plugins/links-in-expressive-code.js'
 // https://astro.build/config
 export default defineConfig({
 
-  /* for deploying to my site subdirectory */
-  base: '/ghostty-reference/',
+  // for deploying to my site subdirectory
+  // base: '/ghostty-reference/',
+
+  // for deploying to github:
+  site: 'https://wong-justin.github.io',
+  base: 'one-page-ghostty-docs',
 
 	integrations: [
 		starlight({
