@@ -1,4 +1,4 @@
-My redesign of ([Ghostty's](https://ghostty.org/)) documentation.
+My redesign of [Ghostty's](https://ghostty.org/) documentation.
 
 - filter content by macOS/Linux
 - shows default configuration values
@@ -25,5 +25,3 @@ Also, see these docs:
 - [Expressive Code blocks documentation](https://expressive-code.com/)
 
 and INTERNALS.
-
-[![Built with Starlight](https://astro.badg.es/v2/built-with-starlight/tiny.svg)](https://starlight.astro.build)
