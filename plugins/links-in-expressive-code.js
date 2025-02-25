@@ -258,10 +258,24 @@ let linuxOnlyKeywords = [
   'linux-cgroup-memory-limit',
   'linux-cgroup-processes-limit',
   'quit-after-last-window-closed-delay',
+  'adw-toolbar-style',
+  'app-notifications',
+  'class',
+  'gtk-adwaita',
+  'gtk-custom-css',
+  'gtk-gsk-renderer',
+  'gtk-opengl-debug',
+  'gtk-single-instance',
+  'gtk-tabs-location',
+  'gtk-titlebar',
+  'gtk-titlebar-hide-when-maximized',
+  'gtk-wide-tabs',
+  'window-subtitle',
 
   // keybind actions
   'toggle_maximize',
   'toggle_window_decorations',
+  'toggle_tab_overview',
 ]
 
 let linkKeywordsInLine = ({line, lineContainer, potentialKeywords, linkPrefix}) => {
