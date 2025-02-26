@@ -2,6 +2,14 @@ CURRENTLY COOKING UP:
 
 BACK BURNER:
 
+- add filters separating X11 and Wayland paremeters/sentences, like
+GTK/Linux + X11   GTK/Linux + Wayland   macOS
+
+- <meta description>
+
+- write my own / edit existing overview for configuration, and overview for keybinds too
+    - then link "keybind" keyword to h2 Keybinds and Actions, removing the normal small description maybe?
+
 - get table of contents (TOC) working again
 
 - ux: when clicking on keyword, use js to smart scroll the definition/h3 directly next to the clicked keyword, instead of jumping to top and using browser anchor links
