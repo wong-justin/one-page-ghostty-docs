@@ -44,6 +44,8 @@ GTK/Linux + X11   GTK/Linux + Wayland   macOS
 
 - put scrollable ldetails panes in cards, even with sadows at top/bottom, to better visually demarcate the content areas. mainly for wider screens.
 
+- ghostty.not.in-one.page redirects to ghostty.org?
+
 OTHER THOUGHTS:
 
 - emphasize the one-page-ness, as opposed to multi-page-ness of ghostty.org. how that relates to searching, clicking, looking,   thinking. eg. "linux users don't have to read abuot macos features". how filtering by platform means wading thru X% less content. compare a reader's usecase between both doc versions, eg. "wondering why $TERM has xterm", or "how do i reload my config", or "what are all the ways i can customize my keybinds"
