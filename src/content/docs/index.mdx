@@ -231,13 +231,54 @@ hello world in the terminal
 
 */}
 
+<CollapsibleSection title="Noteworthy Details" collapsed>
+{/* "you should know", good to know, discussions and stances, discord pins, less-documented, lesser-known, important details, noteworthy discussions */}
+
+<Aside>
+Remember, Ghostty is a passion project led by one person and maintained by volunteers.
+</Aside>
+
+Non-features:
+
+- no sixel support ([#2496](https://github.com/ghostty-org/ghostty/discussions/2496))
+- macOS 12 is not supported ([#3696](https://github.com/ghostty-org/ghostty/discussions/3696#discussioncomment-11703049))
+
+The roadmap includes:
+
+- scrollbars ([#111](https://github.com/ghostty-org/ghostty/issues/111))
+- Windows support ([#2563](https://github.com/ghostty-org/ghostty/discussions/2563))
+
+{/* - publishing `libghostty`, a source-of-truth implementation of terminal specs ([ghostty.org/docs/about](https://ghostty.org/docs/about#libghostty)) */}
+
+Some confusing things:
+
+- command-line actions (e.g. `+list-themes`) are completely different than keybind actions (e.g. `reload_config`).
+Pretend the command-line actions are just called subcommands ([#5622](https://github.com/ghostty-org/ghostty/discussions/5622#discussioncomment-12095784))
+- keybind actions (e.g. `reload_config`) cannot be activated from the command line. 
+Those actions are only accessible through keyboard inputs ([#2353](https://github.com/ghostty-org/ghostty/discussions/2353))
+{/* - most of these lesser-known items are primarily in discord messages, with several repeated in github discussions, and a few making their way to the official documentation */}
+
+</CollapsibleSection>
+
+{/*
+<CollapsibleSection title="Troubleshooting" collapsed>
+table
+problems/error | solutions
+(consider two-col table mobile formatting? eh, later)
+
+ssh/terminfo, copying the error messages
+font rendering different than other term emulators?
+</CollapsibleSection>
+*/}
+
 <CollapsibleSection title="Other Resources" collapsed>
 {/* call this section "Links" instead? */}
 
 - the complete, canonical Ghostty documentation: [ghostty.org/docs](https://ghostty.org/docs)
+- popular feature requests: [github.com/ghostty-org/ghostty/discussions](https://github.com/ghostty-org/ghostty/discussions?discussions_q=is%3Aopen+sort%3Atop)
 - Ghostty source code: [github.com/ghostty-org/ghostty](https://github.com/ghostty-org/ghostty)
-- occasional devlogs and updates: [mitchellh.com/writing](https://mitchellh.com/writing)
 - examples of Ghostty's native macOS features: [gpanders.com/blog](https://gpanders.com/blog/ghostty-is-native-so-what/)
+- occasional devlogs and updates: [mitchellh.com/writing](https://mitchellh.com/writing)
 - a configuration GUI: [ghostty.zerebos.com](https://ghostty.zerebos.com/)
 - community chatter: [discord.gg/ghostty](https://discord.gg/ghostty)
 
