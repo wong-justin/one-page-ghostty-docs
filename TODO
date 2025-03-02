@@ -12,8 +12,6 @@ BACK BURNER:
 - add filters separating X11 and Wayland paremeters/sentences, like
 GTK/Linux + X11   GTK/Linux + Wayland   macOS
 
-- <meta description>
-
 - write my own / edit existing overview for configuration, and overview for keybinds too
     - then link "keybind" keyword to h2 Keybinds and Actions, removing the normal small description maybe?
 
