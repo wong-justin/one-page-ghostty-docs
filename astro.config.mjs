@@ -57,7 +57,7 @@ export default defineConfig({
         SiteTitle: './src/components/SiteTitle.astro',
         PageTitle: './src/components/PageTitle.astro',
         Header: './src/components/Header.astro',
-        // Footer: './src/components/Footer.astro',
+        Footer: './src/components/Footer.astro',
         // Head: './src/components/Head.astro',
         // Page: './src/components/Page.astro',
         // can't seem to override Page (probably too important or big or something) 

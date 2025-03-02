@@ -8,8 +8,21 @@ import Default from '@astrojs/starlight/components/Footer.astro';
 
 <footer>
 	<div class="sl-flex" style="display:flex;align-items:center">
-<ThemeSelect></ThemeSelect>
+		<!-- <ThemeSelect></ThemeSelect> -->
 </div>
+<script type="module" defer>
+// https://pagefind.app/docs/highlighting/
+// this file exists in dist/, but not during development
+// so use try/catch to prevent erros in development
+try {
+  await import('/pagefind/pagefind-highlight.js');
+  new PagefindHighlight({ highlightParam: "highlight" });
+}
+catch (error) {
+  console.log(error)
+}
+console.log('still ok')
+</script>
 <slot></slot>
 </footer>
 
